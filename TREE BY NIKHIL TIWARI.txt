@@ -1,0 +1,251 @@
+                      Tree-data-structure------------->question
+
+q1-> Diameter of the binary tree
+
+       class Solution {
+    public int height(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        if(root.left == null && root.right == null){
+            return 0;
+        }
+    return Math.max(height(root.left),height(root.right))+1;
+    }
+    public int diameterOfBinaryTree(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+         int mid = height(root.left)+height(root.right);
+        if(root.left != null){
+            mid++;
+        }
+        if(root.right != null){
+            mid++;
+        }
+        int lh = diameterOfBinaryTree(root.left);
+        int rh = diameterOfBinaryTree(root.right);
+        return Math.max(lh,Math.max(rh,mid));
+    }
+}
+
+
+q2-> Balenced binary tree
+
+        class Solution {
+    public int height(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        if(root.left == null && root.right == null){
+            return 0;
+        }
+        return Math.max(height(root.left),height(root.right))+1;
+    }
+    public boolean isBalanced(TreeNode root) {
+        if(root == null){
+            return true;
+        }
+     int lh = height(root.left); 
+     if(root.left != null){
+         lh++;
+     }  
+     int rh = height(root.right);
+     if(root.right != null){
+         rh++;
+     }
+     int d = lh-rh;
+     if(d < 0){
+         d = -d;
+     }
+     if(d >1){
+         return false;
+     }
+     return isBalanced(root.left) && isBalanced(root.right);
+    }
+}
+
+
+Q>height of binary tree
+class Solution {
+    // Function to find the height of a binary tree.
+    int height(Node node) {
+        if (node == null) {
+            return 0;
+        }
+        // if (node.left == null && node.right == null) {
+        //     return 0;
+        // }
+        return 1+ Math.max(height(node.left), height(node.right));
+    }
+}
+
+
+Q> preorder traversal by using itration
+
+
+class BinaryTree {
+    // Function to return a list containing the preorder traversal of the tree.
+    static ArrayList<Integer> preorder(Node root) {
+        ArrayList<Integer> res = new ArrayList<>();
+        Stack<Node> stack = new Stack<>();
+
+        if (root == null) {
+            return res;
+        }
+
+        stack.push(root);
+
+        while (!stack.isEmpty()) {
+            Node current = stack.pop();
+            res.add(current.data);
+
+            // Push the right child first so that left child is processed first (as stack is LIFO).
+            if (current.right != null) {
+                stack.push(current.right);
+            }
+
+            // Push the left child so that it is processed next.
+            if (current.left != null) {
+                stack.push(current.left);
+            }
+        }
+
+        return res;
+    }
+}
+
+Q> preorder itrative 
+
+class Tree
+{
+    // Return a list containing the Preorder traversal of the given tree
+    ArrayList<Integer> preOrder(Node root)
+    {
+     
+      ArrayList<Integer> res = new ArrayList<>();
+        Stack<Node> st = new Stack<>();
+
+        if (root == null) {
+            return res;
+        }
+
+        st.push(root);
+
+        while (st.size() != 0) {
+            Node temp = st.pop();
+            res.add(temp.data);
+
+            if (temp.right != null) {
+                st.push(temp.right);
+            }
+            if (temp.left != null) {
+                st.push(temp.left);
+            }
+        }
+        return res;
+    }
+    
+    
+}
+
+Q> inorder itrative
+
+
+class Solution
+{
+    // Return a list containing the inorder traversal of the given tree
+    ArrayList<Integer> inOrder(Node root)
+    {
+     ArrayList<Integer>res = new ArrayList<>();
+     Stack<Node>st = new Stack<>();
+     if(root == null){
+         return res;
+     }
+     st.push(root);
+     while(st.size() != 0){
+         Node temp  = st.peek();
+         if(temp.left != null){
+             st.push(temp.left);
+             temp.left = null;
+         }
+         else{
+             Node t = st.pop();
+             res.add(t.data);
+             if(t.right != null){
+                 st.push(t.right);
+             }
+         }
+     }
+     return res;
+    }
+    
+    
+}
+
+Q> level order traversal
+
+class Solution
+{
+    //Function to return the level order traversal of a tree.
+    static ArrayList <Integer> levelOrder(Node node) 
+    {
+    Queue<Node>q = new LinkedList<>();
+    ArrayList<Integer>res = new ArrayList<>();
+    if(node == null){
+        return res;
+    }
+    q.add(node);
+    while(q.size() != 0){
+        Node temp = q.poll();
+        res.add(temp.data);
+        if(temp.left != null){
+            q.add(temp.left);
+        }
+        if(temp.right != null){
+            q.add(temp.right);
+        }
+    }
+    return res;
+    }
+}
+
+
+Q> reverse level order traversal
+
+class Tree
+{
+    public ArrayList<Integer> reverseLevelOrder(Node root) 
+    {
+       
+       
+       Queue<Node> queue = new LinkedList<>();
+        Stack<Integer> stack = new Stack<>();
+        ArrayList<Integer> res = new ArrayList<>();
+
+        if (root == null) {
+            return res;
+        }
+
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            Node temp = queue.poll();
+            stack.push(temp.data);
+
+            if (temp.right != null) {
+                queue.add(temp.right);
+            }
+
+            if (temp.left != null) {
+                queue.add(temp.left);
+            }
+        }
+
+        while (!stack.isEmpty()) {
+            res.add(stack.pop());
+        }
+
+        return res;
+    }
+}      
